@@ -1,0 +1,50 @@
+{
+  "type": "object",
+  "required": [
+    "findings"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "findings": {
+      "type": "array",
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "required": [
+          "path",
+          "line",
+          "severity",
+          "requirement",
+          "evidence",
+          "recommendation"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "path": {
+            "type": "string"
+          },
+          "line": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "severity": {
+            "enum": [
+              "critical",
+              "major",
+              "minor"
+            ]
+          },
+          "requirement": {
+            "type": "string"
+          },
+          "evidence": {
+            "type": "string"
+          },
+          "recommendation": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

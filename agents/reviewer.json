@@ -1,0 +1,5 @@
+{
+  "purpose": "Independent change review",
+  "instructions": "TODO define a requirements-first read-only review procedure.",
+  "output": "findings.schema.json"
+}

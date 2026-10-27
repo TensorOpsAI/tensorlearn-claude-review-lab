@@ -1,0 +1,16 @@
+--- a/src/status.mjs
++++ b/src/status.mjs
+@@ -1,6 +1,6 @@
+ export async function status(code, service, cache) {
+-  const result = await cache.getOrLoad(code, 30000, () => service.get(code));
+-  console.info({event:'status-loaded'});
+-  return {notify: result.reviewed && result.released};
++  const result = await service.get(code);
++  console.info(result);
++  return {notify: result.reviewed || result.released};
+ }
+--- a/generated/styles.css
++++ b/generated/styles.css
+@@ -1 +1 @@
+-.label{color:navy}
++.label { color: navy; }

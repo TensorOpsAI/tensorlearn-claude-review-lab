@@ -1,0 +1,23 @@
+{
+  "key": "review",
+  "title": "Review without the author\u2019s bias",
+  "minutes": 25,
+  "chapter": "Chapter 2 \u00b7 PR review",
+  "writeAllow": [
+    "REVIEW.md",
+    "agents/reviewer.json",
+    "assessment.json"
+  ],
+  "practice": [
+    "review.practice"
+  ],
+  "needsAI": true,
+  "brief": "A PR description says all requirements and performance were verified. The patch removes caching, logs whole responses and changes approved behavior. Generated-file style changes distract from the defects.",
+  "acceptance": [
+    "Findings cite changed paths/lines, evidence and violated requirements.",
+    "Material privacy, release-gate and caching defects are found.",
+    "The clean patch does not receive invented defects.",
+    "The reviewer remains read-only and does not approve or merge."
+  ],
+  "recipeIndex": 9
+}

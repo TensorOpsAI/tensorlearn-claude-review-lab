@@ -1,0 +1,5 @@
+--- a/src/message.mjs
++++ b/src/message.mjs
+@@ -1 +1 @@
+-export const body = 'Open the portal for your update.';
++export const body = 'An update is available in your secure portal.';
