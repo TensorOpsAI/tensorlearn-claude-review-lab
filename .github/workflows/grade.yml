@@ -9,8 +9,8 @@ permissions:
   id-token: write
 jobs:
   grade:
-    uses: TensorOpsAI/tensorlearn-claude-lab-grader/.github/workflows/grade.yml@56610ff853b1f9176a8fad90cecb0fe4189debae
+    uses: TensorOpsAI/tensorlearn-claude-lab-grader/.github/workflows/grade.yml@e8116017d60d42d1ad3864b57d27d35592ea7362
     with:
-      grader-sha: 56610ff853b1f9176a8fad90cecb0fe4189debae
+      grader-sha: e8116017d60d42d1ad3864b57d27d35592ea7362
       exercise-key: review
       layout: standalone

@@ -1,34 +1,35 @@
 # Review without the author’s bias
 
-A PR description says all requirements and performance were verified. The patch removes caching, logs whole responses and changes approved behavior. Generated-file style changes distract from the defects.
+A PR (`fixtures/defective.patch`) says all requirements were verified (`fixtures/author-narrative.txt`).
+In fact it removes caching, logs whole patient results and weakens the release rule, alongside a harmless
+style change. `fixtures/clean.patch` is a small correct change. The requirements are in `fixtures/approved.md`.
 
-The PR under review is `fixtures/defective.patch`; its description is `fixtures/author-narrative.txt`. `fixtures/clean.patch` is a second, small change to check that your review does not invent problems. The approved requirements, with their IDs, are in `fixtures/approved.md`; there is no separate spec or plan file. The evals and incident labs tell the same incident from other angles.
+**What you'll practise:** turning Claude into a reviewer you can rely on: a written policy decides what counts
+as a finding, and the review runs in a clean context.
 
-Terms used below:
-
-- **Blind review:** a review that sees only the approved requirements and the patch, not the author's description.
-- **Supported finding:** one that points to a changed line and ties it to a requirement in `fixtures/approved.md`.
-- **Reviewer instructions:** the `instructions` in `agents/reviewer.json`: how a read-only reviewer reads the requirements and the patch and reports findings in the `findings.schema.json` shape.
-
-**What you'll practise:** reviewing a change with Claude Code without being steered by the author. Write a review policy, run it in a fresh context that sees only the requirements and the diff, then compare that with a run that also reads the author's claims.
-
-**In the course slides:** Chapter 2, Lesson 3 (AI in the PR review loop): REVIEW.md, findings that cite the requirements, and a cap on nits. The slides rank findings as Important or nit; here `critical` and `major` are the slides' Important, and `minor` is a nit.
+**In the course slides:** Chapter 2, Lesson 3 (AI in the PR review loop): REVIEW.md, findings that cite the
+requirements, and a cap on nits. The slides' *Important* is `critical` or `major` here; a *nit* is `minor`.
 
 ## Task
 
-1. Read the approved intent, spec and plan in `fixtures/approved.md`.
-2. Write `REVIEW.md` and the reviewer’s instructions. In `REVIEW.md`, replace the TODO line with your policy: what counts as evidence, how you choose a severity, how a finding maps to a requirement, how you handle uncertainty, and a cap on minor comments. In `agents/reviewer.json`, fill in `instructions` and keep the other two fields.
-3. Run a blind review using only requirements and the patch: in a fresh Claude Code session, or a subagent, give the reviewer your instructions and let it read only `fixtures/approved.md`, `fixtures/defective.patch` and `REVIEW.md`. Ask for findings in the `findings.schema.json` shape.
-4. Repeat with the author narrative (`fixtures/author-narrative.txt`) added and compare supported findings. In `REVIEW.md`, note what changed between the two runs and how your policy keeps the narrative from replacing evidence.
-5. Test the clean patch (`fixtures/clean.patch`) the same way; tighten the policy until it reduces unsupported findings and minor comments. Record the final findings for both patches in `REVIEW.md`, in the graded block below.
+1. Read the requirements in `fixtures/approved.md`.
+2. Before writing a policy, ask Claude to review `fixtures/defective.patch` against them. Check each finding: is it
+   the right changed line, one requirement and a sensible severity? Note what a policy should settle.
+3. Write your policy in `REVIEW.md` (evidence, severity, one requirement per finding, uncertainty, a cap on
+   minor comments) and the `instructions` in `agents/reviewer.json` (keep its other two fields).
+4. Run the review in a subagent or fresh session that sees only `fixtures/approved.md`,
+   `fixtures/defective.patch` and `REVIEW.md`, and returns findings in the `findings.schema.json` shape.
+5. Repeat with `fixtures/author-narrative.txt` added. In `REVIEW.md`, note what changed; if nothing did, say
+   your policy held.
+6. Review `fixtures/clean.patch` the same way, compare with step 2, and record the final findings for both
+   patches in the graded block below.
 
-A good way to work: draft the policy with Claude, then run each review in a context that has not seen this conversation, so neither the author's claims nor your own discussion steer it. Compare the two runs before you change the policy. Keep the reviewer's output in the chat (do not save it to new files); you copy the final findings into `REVIEW.md` yourself.
+Give Claude one step at a time and read what it reports. Keep review output in the chat, not in new files.
 
-## Working rules
+## Rules
 
-Edit only REVIEW.md and agents/reviewer.json.
-
-The reviewer only reads: it does not edit files, run commands, approve or merge. The grader does not run your reviewer. It reads `REVIEW.md` and `agents/reviewer.json` and checks the findings you record with fixed rules.
+- Change only `REVIEW.md` and `agents/reviewer.json`. The reviewer only reads: it does not edit files, run
+  commands, approve or merge.
 
 ## Acceptance targets
 
@@ -39,10 +40,8 @@ The reviewer only reads: it does not edit files, run commands, approve or merge.
 
 ## Done when
 
-- `REVIEW.md` has your policy in prose (no TODO), a note on how the author narrative changed the review, and one fenced `json` block with findings for both patches.
-- Each finding for `fixtures/defective.patch` names a changed path and line, a requirement ID from `fixtures/approved.md`, the evidence and a recommendation; `fixtures/clean.patch` has no findings.
-- `agents/reviewer.json` describes a read-only, requirements-first review.
-- Only `REVIEW.md` and `agents/reviewer.json` changed.
+- `REVIEW.md` has your policy (no TODO), the narrative note and one `json` block with findings for both patches.
+- `fixtures/clean.patch` has no findings; `agents/reviewer.json` describes a read-only, requirements-first review.
 
 ## Graded format
 
